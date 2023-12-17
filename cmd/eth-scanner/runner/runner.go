@@ -7,7 +7,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ream520/eth-scanner/cmd/internal/block"
+	"github.com/realm520/eth-scanner/cmd/internal/block"
 	"github.com/realm520/eth-scanner/cmd/internal/transaction"
 	"github.com/urfave/cli"
 )
@@ -53,7 +53,7 @@ func NewCommand(sigKillChan chan os.Signal) cli.Command {
 }
 
 func (runner *EthereumTransactionScannerRunner) initialize(c *cli.Context) error {
-	filepath := fmt.Sprintf("%s-transactions-%d.csv", runner.filterAddress, time.Now().Unix())
+	filepath := fmt.Sprintf("transactions-%d.csv", time.Now().Unix())
 
 	file, err := os.OpenFile(filepath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 	if err != nil {
@@ -63,7 +63,7 @@ func (runner *EthereumTransactionScannerRunner) initialize(c *cli.Context) error
 
 	workers := make([]*block.BlockWorker, 0)
 	for i := 0; i < runner.blockWorkerNum; i++ {
-		workers = append(workers, block.NewBlockWorker(runner.endpoint, runner.rawTransactions, runner.waitGroup))
+		workers = append(workers, block.NewBlockWorker(runner.outputfile, runner.endpoint, runner.rawTransactions, runner.waitGroup))
 	}
 
 	log.Println("Starting scanner for blocks", runner.startBlock, "-", runner.endBlock)
@@ -91,7 +91,7 @@ func (runner *EthereumTransactionScannerRunner) start(c *cli.Context) error {
 	runner.waitGroup.Add(1)
 	go runner.blockWorkerManager.StartWorkers()
 
-	log.Println("starting transaction worker...")
+	/*log.Println("starting transaction worker...")
 	runner.waitGroup.Add(1)
 	go runner.transactionWorker.Start()
 
@@ -101,7 +101,7 @@ func (runner *EthereumTransactionScannerRunner) start(c *cli.Context) error {
 
 	log.Println("starting scanner reporter...")
 	runner.waitGroup.Add(1)
-	go runner.reportProgress()
+	go runner.reportProgress()*/
 
 	runner.waitGroup.Add(1)
 	go runner.handleShutdown()

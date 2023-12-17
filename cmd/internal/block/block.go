@@ -1,6 +1,6 @@
 package block
 
-import "github.com/cpurta/eth-scanner/cmd/internal/transaction"
+import "github.com/realm520/eth-scanner/cmd/internal/transaction"
 
 type RPCBlockResult struct {
 	ID      int         `json:"id"`

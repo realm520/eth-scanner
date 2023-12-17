@@ -7,8 +7,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/cpurta/eth-scanner/cmd/internal/block"
-	"github.com/cpurta/eth-scanner/cmd/internal/transaction"
+	"github.com/ream520/eth-scanner/cmd/internal/block"
+	"github.com/realm520/eth-scanner/cmd/internal/transaction"
 	"github.com/urfave/cli"
 )
 

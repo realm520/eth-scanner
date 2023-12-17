@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/cpurta/eth-scanner/cmd/eth-scanner/runner"
+	"github.com/realm520/eth-scanner/cmd/eth-scanner/runner"
 	"github.com/urfave/cli"
 )
 

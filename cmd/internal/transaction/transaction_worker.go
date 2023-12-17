@@ -44,7 +44,7 @@ func (worker *TransactionWorker) Stop() {
 }
 
 func (worker *TransactionWorker) containsFilterAddress(transaction *TransactionResult) bool {
-	if transaction.To == worker.filterAddress || transaction.From == worker.filterAddress || strings.Contains(transaction.Input, worker.filterAddress[2:]) {
+	if worker.filterAddress == "" || transaction.To == worker.filterAddress || transaction.From == worker.filterAddress || strings.Contains(transaction.Input, worker.filterAddress[2:]) {
 		return true
 	}
 
